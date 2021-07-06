@@ -61,14 +61,14 @@ doThese(track){
 }
 
 updatePlaylistName(name){
-this.setState({updatePlaylistName:name});
+this.setState({playlistName:name});
 }
 
 savePlaylist(){
   const trackUrls = this.state.playlistTracks.map(track => track.uri);
   Spotify.savePlaylist(this.state.playlistName, trackUrls).then(()=>{
     this.setState({
-      updatePlaylistName :this.state.name,
+      playlistName :this.state.playlistName,
       playlistTracks:[]
     })
   })
@@ -97,7 +97,7 @@ render(){
         <SearchBar onSearch={this.search}></SearchBar>
         <div className="App-playlist">
           <SearchResults SearchResults={this.state.SearchResults} onAdd={this.doThese}></SearchResults>
-        <Playlist playlistTracks={this.state.playlistTracks} onNameChange={this.updatePlaylistName} onRemove={this.removeTrack} onSave={this.savePlaylist}></Playlist>
+        <Playlist playlistTracks={this.state.playlistTracks} onNameChange={this.updatePlaylistName} playlistName={this.state.playlistName} onRemove={this.removeTrack} onSave={this.savePlaylist}></Playlist>
         </div>
       </div>
 </div>
